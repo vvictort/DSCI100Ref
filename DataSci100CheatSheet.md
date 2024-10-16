@@ -34,7 +34,7 @@
 ### <ins>**Modifying the Data**</ins> (Wrangling more so)
 | Function      | Description                                                                 | Usage                                        |
 | :------------ | :-------------------------------------------------------------------------- | :------------------------------------------- |
-| `filter()`    | Filter the data based on conditional (**rows**)                             | `filter(data, cond == conditional)`          |
+| `filter()`    | Filter the data based on conditional (**rows**)                              | `filter(data, cond == conditional)`          |
 | `select()`    | Select the columns within the given data (**columns**, `start_with("...")`) | `select(data, colname1, colname2)`           |
 | `mutate()`    | Create a **new column** containing the values caluclated                    | `mutate(data, new_column = old_column * 10)` |
 | `arrange()`   | Ordering the columns (default is ascending)                                 | `arrange(data, by = desc(col1))`             |
@@ -131,7 +131,7 @@ ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
  ```R
  options(repr.plot.width = 8, repr.plot.height = 8)
  ```
->## Modelling
+>## tidymodels (Modelling)
  # Todo
  - [ ] SQLite (loading, reading and modifying) -> end of Chapter 2
  - [ ] Rowise, mutate, across, group_by (end of Chapter 3)
