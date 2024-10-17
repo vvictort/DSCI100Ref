@@ -30,6 +30,55 @@
    1. `readxl` is a package that is **not** in `tidyverse`
    2. Others require package `readr` that is already exist in `tidyverse`
    3. Remember to specify `sheet` if needed
+   
+**<ins>Reading from Database</ins>**
+1. SQLite Database
+```R
+# provide a channel that connect to the database
+library(DBI)
+
+canlang_conn <- dbConnect(RSQLite::SQLite(), "data/can_lang.db")
+
+# show what Tables are in this Database
+tables <- dbListTables(canlang_conn) 
+tables
+
+# make a reference to the table so that we can perform *some* operations on this table
+library(dbplyr)
+
+lang_db <- tbl(canlang_conn, "lang")
+lang_db
+
+# collect the database (turning it into R object)
+collect(lang_db)
+write_csv(lang_db, "data/lang_db.csv")
+```
+2. PostgreSQL Database
+```R
+# connect to RPostgres
+library(RPostgres)
+canmov_conn <- dbConnect(RPostgres::Postgres(), dbname = "can_mov_db",
+                        host = "fakeserver.stat.ubc.ca", port = 5432,
+                        user = "user0001", password = "abc123")
+# see all the tables (there are 10 here)
+dbListTables(canmov_conn)
+
+# we pick "Ratings" table
+ratings_db <- tbl(canmov_conn, "ratings")
+ratings_db
+
+# perform some dplyr operations
+avg_rating_db <- select(ratings_db, average_rating)
+avg_rating_db
+
+# collect
+avg_rating_data <- collect(avg_rating_db)
+```
+**Note:** PostgreSQL (also called Postgres) is a very popular and open-source option for relational database software. 
+Unlike SQLite, PostgreSQL uses a client–server database engine, as it was designed to be used and accessed on a network. 
+This means that you have to provide more information to R when connecting to Postgres databases.
+   - This means that it can be accessed remotely since it exists on a network
+   - Thereby, allowing multiple people to access it (i.e. enhance scalability) 
 
 ### <ins>**Modifying the Data**</ins> (Wrangling more so)
 | Function      | Description                                                                 | Usage                                        |
@@ -82,6 +131,19 @@ group_by(region_lang, region) |>
    - Line Plots &rarr; trends with respect to an independent and order quantity (i.e. time)
    - Bar Plots &rarr; comparing amounts
    - Histogram &rarr; distribution of **one** quantitative variable (i.e. all of its possible values and occurence)
+
+**Rules of Thumbs for Visualization**
+   1. Minimize Noise
+      - Use colors sparingly
+      - Try not to overplot
+      - Only make the plot as you need
+      - Try not to adjust the zoom if the difference is small, sometimes small difference means something 
+   2. Convey the Message 
+      - Use colors that are suitable for color-blinded individuals
+      - Ensure graph properties (i.e. texts, symbols, axis, etc.) are big enough to read
+      - Use legends and labels to make it easier for the reader to understand the graph
+      - Make sure the visualization answer your questions
+      - Redundancy can sometimes be helpful 
 
 **Describing the Graph:** (key characteristics to include)
    1. Direction
