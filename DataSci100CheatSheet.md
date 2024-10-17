@@ -99,23 +99,23 @@ There ways to modify the data in a more complex case:
 1. **`pivot_wider`** &rarr; if rows represent more than one observation
 ```R
 pivot_wider(data,
-			names_from = old_column,
-			values_from = old_cells)	
+		 names_from = old_column,
+		 values_from = old_cells)	
 ```
 2. **`pivot_longer`** &rarr; if columns have same variable
 ```R
 pivot_longer(data,
-			 cols = col1:col3,
-			 names_to = "new_name",
-			 values_to = "new_values_name")
+		 cols = col1:col3,
+		 names_to = "new_name",
+		 values_to = "new_values_name")
 ```
 3. **`separate`** &rarr; if a cells have ***two*** values
 ```R
 separate(data,
-		 col = value,
-		 into = c("new_col1", "new_col2"),
-		 sep = "/", # can be any char
-		 convert = TRUE) # default data-type is chr
+	 col = value,
+	 into = c("new_col1", "new_col2"),
+	 sep = "/", # can be any char
+	 convert = TRUE) # default data-type is chr (convert to right data type)
 ```
 4. **`summarize()`** 
 ```R
