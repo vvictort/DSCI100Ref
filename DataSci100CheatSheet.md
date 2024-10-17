@@ -34,7 +34,7 @@
 ### <ins>**Modifying the Data**</ins> (Wrangling more so)
 | Function      | Description                                                                 | Usage                                        |
 | :------------ | :-------------------------------------------------------------------------- | :------------------------------------------- |
-| `filter()`    | Filter the data based on conditional (**rows**)                              | `filter(data, cond == conditional)`          |
+| `filter()`    | Filter the data based on conditional (**rows**)                             | `filter(data, cond == conditional)`          |
 | `select()`    | Select the columns within the given data (**columns**, `start_with("...")`) | `select(data, colname1, colname2)`           |
 | `mutate()`    | Create a **new column** containing the values caluclated                    | `mutate(data, new_column = old_column * 10)` |
 | `arrange()`   | Ordering the columns (default is ascending)                                 | `arrange(data, by = desc(col1))`             |
@@ -76,9 +76,25 @@ group_by(region_lang, region) |>
     )
 ```
 
-<div style="page-break-after: always;"></div>
-
 ### <ins>**Graphing**</ins>
+**Things to remember for Visualization:**
+   - Scatter Plots &rarr; between two quantitative variables
+   - Line Plots &rarr; trends with respect to an independent and order quantity (i.e. time)
+   - Bar Plots &rarr; comparing amounts
+   - Histogram &rarr; distribution of **one** quantitative variable (i.e. all of its possible values and occurence)
+
+**Describing the Graph:** (key characteristics to include)
+   1. Direction
+      - Positive relationship (w/ x-axis)
+      - Negative relationship (w/ x-axis)
+      - Little to no relationship (w/ x-axis)  
+   2. Strength
+      - Strong (if data reliably shows a trend)
+      - Weak (if shown otherwise)
+   3. Shape 
+      - Linear vs. Nonlinear (i.e. can you draw a straight line?) 
+  
+  **Graphing**
 1. **Normal Scatter Plot graph**
 ```R
 ggplot(data = the_data_name, aes(x = x_col, y = y_col)) + # Aesthetics
@@ -87,7 +103,7 @@ ggplot(data = the_data_name, aes(x = x_col, y = y_col)) + # Aesthetics
     ylab("The Name of Y-axis") +
     theme(text = element_text(size = 20)) # Themes
 ```
-2. **Graph where data points are colored based on each class**
+1. **Graph where data points are colored based on each class**
 ```R
 ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
                                  y = y_col,
@@ -99,7 +115,7 @@ ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
          title = "Title of Graph") +
     theme(text = element_text(size = 20)) # Theme
 ```
-3. **Graph with Color Brewer** -> Scatter Plot (ggplot2??)
+1. **Graph with Color Brewer** -> Scatter Plot (ggplot2??)
 ```R
 ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
                                  y = y_col,
@@ -111,18 +127,31 @@ ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
     scale_fill_brewer(palette = "Set2") +
     theme(text = element_text(size = 20)) # Theme
 ```
+1. **`library(lubridate)`** &rarr; for using dates
+```R
+library(lubridate) # a part of tidyverse, but not loaded in so load in now
 
+ggplot(data, aes(x = col1, y = col2)) +
+   geom_point() +
+   labs(x = "Col1", y "Col2") +
+   xlim(c("1990-02-01", "2017-01-02")) # must be a vector for xlim()
+```
 #### Geometric That You Can Replace
-| Function          | Description                                  | Note                     |
-| :---------------- | :------------------------------------------- | :----------------------- |
-| `geom_point()`    | Create Scatter Plot                          |
-| `geom_bar()`      | Create bar graph                             |                          |
-| `geom_histogram`  | Create histogram                             |                          |
-| `geom_line()`     | Line graph                                   |                          |
-| `geom_vline() `   | Insert vertical line                         |                          |
-| `alpha = 0.6`     | Transparency of points                       | an argument for **plot** |
-| `size = 2`        | Change size of scatter plot                  | an argument              |
-| `stat = identity` | Make heights of bar equals to amount ***y*** | an argument for **bar**  |
+| Function                               | Description                                          | Note                      |
+| :------------------------------------- | :--------------------------------------------------- | :------------------------ |
+| `geom_point()`                         | Create Scatter Plot                                  |
+| `geom_bar()`                           | Create bar graph                                     |                           |
+| `geom_histogram`                       | Create histogram                                     |                           |
+| `geom_line()`                          | Line graph                                           |                           |
+| `geom_vline() `                        | Insert vertical line                                 |                           |
+| `alpha = 0.6`                          | Transparency of points                               | an argument for **plot**  |
+| `size = 2`                             | Change size of scatter plot                          | an argument               |
+| `stat = identity`                      | Make heights of bar equals to amount ***y***         | an argument for **bar**   |
+| `xlim(c(lower, upper))`                | Narrow the graph down to lower and upper bound       | a **LAYER**               |
+| `scale_x/y_log10(labels = as_comma())` | Log10 the x-axis or y-axis                           | a **LAYER**               |
+| `facet_grid(rows/columns = vars(Var))` | Make the plots in rows or columns                    | a **LAYER**               |
+| `legend.position = "top"`              | Changing the position of legends around the plots    | an argument for **theme** |
+| `legend.direction = "vertical"`        | Specify how the legends are stacked (vert. or hori.) | an argument for **theme** |
 
 - Special Notes to Consider (when making a graph):
   1. You can change the x-axis and y-axis to make a bar graph more clean
@@ -135,5 +164,7 @@ ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
  # Todo
  - [ ] SQLite (loading, reading and modifying) -> end of Chapter 2
  - [ ] Rowise, mutate, across, group_by (end of Chapter 3)
+ - [ ] How to interpret (Chapter 4)
+ - [ ] fill = fill
 
  
