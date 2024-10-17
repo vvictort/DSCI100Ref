@@ -12,6 +12,7 @@
 | `read_excel()`*    | Read Excel files                        | `read_excel("data/test.xlsx")`            |
 | `nrow()`           | Count # of rows of data frame or vector | `nrow(data)` **or** `nrow(vector)`        |
 | `download.file()`* | Download the file directly to local PC  | `download.file(url, "data/test.csv")`     |
+
 **<ins>Note:</ins>** 
 1.  `read_delim()` can have many arguments
     1. `delim` -> specify the delimeters
@@ -224,9 +225,9 @@ ggplot(data, aes(x = col1, y = col2)) +
  ```
 >## tidymodels (Modelling)
  # Todo
- - [ ] SQLite (loading, reading and modifying) -> end of Chapter 2
+ - [x] SQLite (loading, reading and modifying) -> end of Chapter 2
  - [ ] Rowise, mutate, across, group_by (end of Chapter 3)
- - [ ] How to interpret (Chapter 4)
+ - [x] How to interpret (Chapter 4)
  - [ ] fill = fill
 
  
