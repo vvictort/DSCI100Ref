@@ -1,4 +1,4 @@
-# Cheat Sheet Midterm 1
+# Data Science Review Sheet
 
 >## Tidyverse (load, modify and plot data)
 
@@ -223,7 +223,36 @@ ggplot(data, aes(x = col1, y = col2)) +
  ```R
  options(repr.plot.width = 8, repr.plot.height = 8)
  ```
->## tidymodels (Modelling)
+>## Tidymodels (Modelling I and II)
+**Rule of Thumbs**:
+1. Only use your **training set** to evaluate your classier (nothing else)
+
+**Evaluate Your Model/Classifier**:\
+There are many different ways to *evaluate* your classifier. In this course,
+you will only use `accuracy`, `precision` and `recall`.
+
+**Retuning Your Model**\
+Tuning is important for your classifier and model.
+
+**Ways to Train K-NN Model**
+1. `workflow()` (Classification I)
+```R
+# load the unscaled cancer data
+# and make sure the response variable, Class, is a factor
+unscaled_cancer <- read_csv("data/wdbc_unscaled.csv") |>
+  mutate(Class = as_factor(Class)) |>
+  mutate(Class = fct_recode(Class, "Malignant" = "M", "Benign" = "B"))
+
+# create the K-NN model
+knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 7) |>
+  set_engine("kknn") |>
+  set_mode("classification")
+
+# create the centering / scaling recipe
+uc_recipe <- recipe(Class ~ Area + Smoothness, data = unscaled_cancer) |>
+  step_scale(all_predictors()) |>
+  step_center(all_predictors())
+```
  # Todo
  - [x] SQLite (loading, reading and modifying) -> end of Chapter 2
  - [ ] Rowise, mutate, across, group_by (end of Chapter 3)
