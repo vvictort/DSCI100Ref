@@ -257,21 +257,26 @@ uc_recipe <- recipe(Class ~ Area + Smoothness, data = unscaled_cancer) |>
 This section will cover (1) *K-NN Regression* and (2) *K-NN Linear Regression*
 
 **K-NN Regression**
-- Disadvantage:
+- <ins>Disadvantage</ins>:
    - Can be slow if data is large
    - May not perform well if there are *too many predictors*
    - Unable to *extrapolate* (i.e. predicting values beyond the data set)
    - The trendline from the data set is hard to interpret (i.e. wringly lines)
-- Advantage: (same as K-NN Classification)
+- <ins>Advantage</ins>: (same as K-NN Classification)
   - Few assumptions are needed based on the shape of the graph
 
+***Insert Code Here***
+
 **K-NN Linear Regression**
-- Disadvantage:
+- <ins>Disadvantage</ins>:
   - Can be slow if data is large (**same**)
   - May not perform well if there are *too many predictors* (**same**)
-- Advantage:
+- <ins>Advantage</ins>:
   - Is able to *extrapolate* (as you you have an equation to work with)
   - More interpretable overall trendline
+  
+***Insert Code Here***
+
  # Todo
  - [x] SQLite (loading, reading and modifying) -> end of Chapter 2
  - [ ] Rowise, mutate, across, group_by (end of Chapter 3)
