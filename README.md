@@ -1,4 +1,4 @@
-# Data Science Review Sheet
+*# Data Science Review Sheet
 
 >## Tidyverse (load, modify and plot data)
 
@@ -15,14 +15,14 @@
 
 **<ins>Note:</ins>** 
 1.  `read_delim()` can have many arguments
-    1. `delim` -> specify the delimeters
+    1. `delim` &rarr; specify the delimeters
        - Must use _special_ (escaped) characters (i.e. `"\t"`)  
-    2. `col_names` -> specify if you want R to give you a col_names
+    2. `col_names` &rarr; specify if you want R to give you a col_names
        - You can also create a vector via `c()` and make it your col_names
        -  Can be FALSE (indicating no headers; default is TRUE)
-    3. `skip = 3` -> tell read_*() to skip # rows
+    3. `skip = 3` &rarr; tell read_*() to skip # rows
        - Can be any number
-    4. `file = path` -> specify the path of the a file
+    4. `file = path` &rarr; specify the path of the a file
        - An ***absolute*** path start with `/` (i.e. `"/root/folder/test.csv"`)
          -  Starting from <ins>root</ins> folder      
        - A ***relative*** path start with a name (i.e. `"curr/fold/text.csv"`)
@@ -34,7 +34,7 @@
    
 **<ins>Reading from Database</ins>**
 1. SQLite Database
-```R
+```r
 # provide a channel that connect to the database
 library(DBI)
 
@@ -55,7 +55,7 @@ collect(lang_db)
 write_csv(lang_db, "data/lang_db.csv")
 ```
 2. PostgreSQL Database
-```R
+```r
 # connect to RPostgres
 library(RPostgres)
 canmov_conn <- dbConnect(RPostgres::Postgres(), dbname = "can_mov_db",
@@ -86,7 +86,7 @@ This means that you have to provide more information to R when connecting to Pos
 | :------------ | :-------------------------------------------------------------------------- | :------------------------------------------- |
 | `filter()`    | Filter the data based on conditional (**rows**)                             | `filter(data, cond == conditional)`          |
 | `select()`    | Select the columns within the given data (**columns**, `start_with("...")`) | `select(data, colname1, colname2)`           |
-| `mutate()`    | Create a **new column** containing the values caluclated                    | `mutate(data, new_column = old_column * 10)` |
+| `mutate()`    | Create a **new column** containing the values calculated                    | `mutate(data, new_column = old_column * 10)` |
 | `arrange()`   | Ordering the columns (default is ascending)                                 | `arrange(data, by = desc(col1))`             |
 | `slice()`     | Extra rows based on the range of #                                          | `slice(data, 1:10)`                          |
 | `rename()`    | Rename the headers                                                          | `rename(data, new_name = old_name)`          |
@@ -97,20 +97,20 @@ This means that you have to provide more information to R when connecting to Pos
 
 There ways to modify the data in a more complex case:
 1. **`pivot_wider`** &rarr; if rows represent more than one observation
-```R
+```r
 pivot_wider(data,
 		 names_from = old_column,
 		 values_from = old_cells)	
 ```
 2. **`pivot_longer`** &rarr; if columns have same variable
-```R
+```r
 pivot_longer(data,
 		 cols = col1:col3,
 		 names_to = "new_name",
 		 values_to = "new_values_name")
 ```
 3. **`separate`** &rarr; if a cells have ***two*** values
-```R
+```r
 separate(data,
 	 col = value,
 	 into = c("new_col1", "new_col2"),
@@ -118,7 +118,7 @@ separate(data,
 	 convert = TRUE) # default data-type is chr (convert to right data type)
 ```
 4. **`summarize()`** 
-```R
+```r
 group_by(region_lang, region) |>
   summarize(
     min_most_at_home = min(most_at_home),
@@ -136,11 +136,11 @@ group_by(region_lang, region) |>
 **Rules of Thumbs for Visualization**
    1. Minimize Noise
       - Use colors sparingly
-      - Try not to overplot
+      - Avoid overplotting
       - Only make the plot as you need
-      - Try not to adjust the zoom if the difference is small, sometimes small difference means something 
+      - Avoid adjusting the zoom if the difference is small, as small differences can be meaningful
    2. Convey the Message 
-      - Use colors that are suitable for color-blinded individuals
+      - Use colors that are suitable for color-blind individuals
       - Ensure graph properties (i.e. texts, symbols, axis, etc.) are big enough to read
       - Use legends and labels to make it easier for the reader to understand the graph
       - Make sure the visualization answer your questions
@@ -159,16 +159,16 @@ group_by(region_lang, region) |>
   
   **Graphing**
 1. **Normal Scatter Plot graph**
-```R
+```r
 ggplot(data = the_data_name, aes(x = x_col, y = y_col)) + # Aesthetics
-    geom_point() + # Geomtric
+    geom_point() + # Geometric
     xlab("The Name of X-axis") + # Labels
     ylab("The Name of Y-axis") +
     theme(text = element_text(size = 20)) # Themes
 ```
 1. **Graph where data points are colored based on each class**
-```R
-ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
+```r
+ggplot(data = the_data_name, aes(x = x_col,  # Aesthetics
                                  y = y_col,
                                  color = class)) +
     geom_point(alpha = 0.6) +  # Geometric
@@ -179,7 +179,7 @@ ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
     theme(text = element_text(size = 20)) # Theme
 ```
 1. **Graph with Color Brewer** -> Scatter Plot (ggplot2??)
-```R
+```r
 ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
                                  y = y_col,
                                  color = class)) +
@@ -191,7 +191,7 @@ ggplot(data = the_data_name, aes(x = x_col,  #Aesthetics
     theme(text = element_text(size = 20)) # Theme
 ```
 1. **`library(lubridate)`** &rarr; for using dates
-```R
+```r
 library(lubridate) # a part of tidyverse, but not loaded in so load in now
 
 ggplot(data, aes(x = col1, y = col2)) +
@@ -220,7 +220,7 @@ ggplot(data, aes(x = col1, y = col2)) +
   1. You can change the x-axis and y-axis to make a bar graph more clean
   2. Always use color palette that suitable for color-blind (look at [3])
 #### Repr (format the plot?)
- ```R
+ ```r
  options(repr.plot.width = 8, repr.plot.height = 8)
  ```
 >## Tidymodels (Modelling I and II)
@@ -236,7 +236,7 @@ Tuning is important for your classifier and model.
 
 **Ways to Train K-NN Model**
 1. `workflow()` (Classification I)
-```R
+```r
 # load the unscaled cancer data
 # and make sure the response variable, Class, is a factor
 unscaled_cancer <- read_csv("data/wdbc_unscaled.csv") |>
@@ -254,18 +254,106 @@ uc_recipe <- recipe(Class ~ Area + Smoothness, data = unscaled_cancer) |>
   step_center(all_predictors())
 ```
 >## Tidymodels (Regression I + II)
-This section will cover (1) *K-NN Regression* and (2) *K-NN Linear Regression*
+What happens if you want to predict a <ins>quantitative</ins> value instead of a label?
+   1. *K-NN Regression* 
+   2. *K-NN Linear Regression*.
+
+How can we determine (1) the K-value and (2) if our model is any "good"?
+   - Same as K-NN *Classification*
+      1. Training Set vs. Testing Set (K-value)
+      2. Accuracy &rarr; Cross-Validation + (lowest) RMSPE (effectiveness of model)
+
+**Root Mean Squared Prediction Error (RMSPE)**\
+Essentially, this is the "error" between the predicted value and the observed value for 
+all observations. By error, this refers to the distance between the predicted and observed values. 
+We will take the lowest like 'accuracy' in K-NN Classification.
+   $$ 
+   \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}
+   $$
+   - $n$ = # of observations
+   - $y_i$ = the observed value at $i^{th}$ observation
+   - $\hat{y_i}$ = the predicted value at $i^{th}$ observation
+
+<ins>**Note**</ins>: 
+   1. The ***units*** matches with the ***predicted*** variables, and not out of 1 (i.e. accuracy in Classification).
+   2. These errors are the ***vertical*** distances, since $y$-variable is our *predicted*
+   3. RMSE and RMSPE are two <ins>**different**</ins> things (but same formula) 
+      - RMSE &rarr; how well the model fit our [training] data
+      - RMSPE &rarr; how well the model *generalizes* <ins>unseen</ins> data
 
 **K-NN Regression**
 - <ins>Disadvantage</ins>:
    - Can be slow if data is large
    - May not perform well if there are *too many predictors*
-   - Unable to *extrapolate* (i.e. predicting values beyond the data set)
+   - Unable to *extrapolate* (i.e. predicting values *beyond* the data set)
    - The trendline from the data set is hard to interpret (i.e. wringly lines)
 - <ins>Advantage</ins>: (same as K-NN Classification)
   - Few assumptions are needed based on the shape of the graph
+  - Simple, intuitive algorithm,
+  - Requires few assumptions about what the data must look like
+  - Works well with non-linear relationships (i.e., if the relationship is not a straight line).
 
-***Insert Code Here***
+```r
+# Split the data
+sacramento_split <- initial_split(sacramento, prop = 0.75, strata = price)
+sacramento_train <- training(sacramento_split)
+sacramento_test <- testing(sacramento_split)
+
+# Cross-Validation and lowest RMSPE
+sacr_recipe <- recipe(price ~ sqft, data = sacramento_train) |>
+  step_scale(all_predictors()) |>
+  step_center(all_predictors())
+
+sacr_spec <- nearest_neighbor(weight_func = "rectangular",
+                              neighbors = tune()) |>
+  set_engine("kknn") |>
+  set_mode("regression")
+
+sacr_vfold <- vfold_cv(sacramento_train, v = 5, strata = price)
+
+sacr_wkflw <- workflow() |>
+  add_recipe(sacr_recipe) |>
+  add_model(sacr_spec)
+
+sacr_wkflw
+
+gridvals <- tibble(neighbors = seq(from = 1, to = 200, by = 3))
+
+sacr_results <- sacr_wkflw |>
+  tune_grid(resamples = sacr_vfold, grid = gridvals) |>
+  collect_metrics() |>
+  filter(.metric == "rmse")
+
+# show the results
+sacr_results
+
+# show only the row of minimum RMSPE
+sacr_min <- sacr_results |>
+  filter(mean == min(mean))
+
+sacr_min # K = 52
+
+# Train the model on ENTIRE training data set
+kmin <- sacr_min |> pull(neighbors)
+
+sacr_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = kmin) |>
+  set_engine("kknn") |>
+  set_mode("regression")
+
+sacr_fit <- workflow() |>
+  add_recipe(sacr_recipe) |>
+  add_model(sacr_spec) |>
+  fit(data = sacramento_train)
+
+# Evalution
+sacr_summary <- sacr_fit |>
+  predict(sacramento_test) |>
+  bind_cols(sacramento_test) |>
+  metrics(truth = price, estimate = .pred) |>
+  filter(.metric == 'rmse')
+
+sacr_summary
+```
 
 **K-NN Linear Regression**
 - <ins>Disadvantage</ins>:
@@ -284,3 +372,4 @@ This section will cover (1) *K-NN Regression* and (2) *K-NN Linear Regression*
  - [ ] fill = fill
 
  
+*
