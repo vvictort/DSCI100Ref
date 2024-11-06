@@ -267,7 +267,9 @@ How can we determine (1) the K-value and (2) if our model is any "good"?
 Essentially, this is the "error" between the predicted value and the observed value for 
 all observations. By error, this refers to the distance between the predicted and observed values. 
 We will take the lowest like 'accuracy' in K-NN Classification.
-   $$\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}$$
+   ```math
+   \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}
+   ```
    - $n$ = # of observations
    - $y_i$ = the observed value at $i^{th}$ observation
    - $\hat{y_i}$ = the predicted value at $i^{th}$ observation
