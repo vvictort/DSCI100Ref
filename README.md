@@ -365,6 +365,13 @@ sacr_summary
   
 ***Insert Code Here***
 
+In K-nearest neighbors models, recall that the model fit changes depending 
+on whether we standardize first or not. In linear regression, standardization 
+does not affect the fit (it does affect the coefficients in the equation, though!). 
+So you can standardize if you want—it won’t hurt anything—but if you leave the 
+predictors in their original form, the best fit coefficients are usually easier 
+to interpret afterward.
+
  # Todo
  - [x] SQLite (loading, reading and modifying) -> end of Chapter 2
  - [ ] Rowise, mutate, across, group_by (end of Chapter 3)
