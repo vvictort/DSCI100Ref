@@ -356,14 +356,18 @@ sacr_summary
 ```
 
 **K-NN Linear Regression**
+- Linear Regression provides a Line of Best Fit (LoBF) that minimizes RMSPE
+- 
 - <ins>Disadvantage</ins>:
   - Can be slow if data is large (**same**)
   - May not perform well if there are *too many predictors* (**same**)
 - <ins>Advantage</ins>:
   - Is able to *extrapolate* (as you you have an equation to work with)
   - More interpretable overall trendline
-  
-***Insert Code Here***
+  - More interpretable results that describe the relationship between 
+    the predictor and response variables (due to the equations)
+  - 
+
 
 In K-nearest neighbors models, recall that the model fit changes depending 
 on whether we standardize first or not. In linear regression, standardization 
